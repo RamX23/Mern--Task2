@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const Image=require('./models/Imagemodel')
 
+
+
 app.use(bodyParser.json());
 var cookieParser = require('cookie-parser');
 const { log } = require('console');
@@ -18,10 +20,18 @@ app.set('view engine','ejs')
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser())
 app.use(cors());
+app.use(express.static(path.join(__dirname,'public')));
+
+ 
+app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
+
+app.get("/", (req, res) => {
+  app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+});
+
 
 
 app.post('/signup',(req,res)=>{
@@ -113,7 +123,7 @@ app.get('/images',async(req,res)=>{
  }
 })
 
-app.get('/like',async(req,res)=>{
+app.post('/like',async(req,res)=>{
 try{
   const { imageId } = req.body;
    const image=await Image.findById(imageId);
