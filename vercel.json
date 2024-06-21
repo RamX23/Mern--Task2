@@ -9,6 +9,26 @@
       {
         "src": "/.*",
         "dest": "app.js"
-      }
+      },
+      {
+        "src":"/home",
+        "dest":"/"
+      },
+      {
+        "src":"/login",
+        "dest":"/"
+      },
+      {
+        "src":"/signup",
+        "dest":"/"
+      },
+      {
+        "src":"/upload",
+        "dest":"/"
+      },
+      {
+        "src":"/forgot",
+        "dest":"/"
+      },
     ]
   }
